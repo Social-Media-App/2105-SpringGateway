@@ -5,21 +5,38 @@ server:
    
 
 
+#spring:
+#  application:
+#    name: SN-Gateway
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#      routes:
+#      - id: userMicroservice
+#        uri: lb://userMicroservice
+#       predicates:
+#       - Path=/user/**
+#               
+#     - id: postMicroservice
+#        uri: lb://postMicroservice
+#        predicates:
+#       - Path=/post/**
+        
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9017/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    instance-id: ${spring.application.name}:{random.value}
+    preferIpAddress: true
+    
 spring:
   application:
-    name: SN-Gateway
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes:
-      - id: userMicroservice
-        uri: lb://userMicroservice
-        predicates:
-        - Path=/user/**
-                
-      - id: postMicroservice
-        uri: lb://postMicroservice
-        predicates:
-        - Path=/post/**
+    name: gateway-service
+  
+        
