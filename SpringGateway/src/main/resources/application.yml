@@ -1,0 +1,25 @@
+server:
+    port: 9000
+    
+    
+   
+
+
+spring:
+  application:
+    name: SN-Gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: userMicroservice
+        uri: lb://userMicroservice
+        predicates:
+        - Path=/user/**
+                
+      - id: postMicroservice
+        uri: lb://postMicroservice
+        predicates:
+        - Path=/post/**
