@@ -14,3 +14,38 @@ eureka:
 spring:
   application:
     name: social-media-cloud-gateway
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+              allowedOrigins: "*"
+              allowedMethods: "*"
+              allowedHeaders: "*"
+      routes:
+      - id: post-service
+        uri: lb://post-service
+        predicates:
+        - Path= /post/**
+      - id: post-service
+        uri: lb://post-service
+        predicates:
+        - Path= /comment/**
+      - id: post-service
+        uri: lb://post-service
+        predicates:
+        - Path= /likes/**
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path= /login-service/**
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path= /user-service/**
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path= /group-service/**
